@@ -38,7 +38,7 @@
         },
         "author": "Mihai Alexandru Ricanu",
         "peripherals": ["APM","DAC","ADCCC","FVR"],
-        "keywords": ["APM"],
+        "keywords": ["triangle","waveform"],
         "additionalData": {
             "longDescription": {
                 "metaDataVersion": "1.0.0",
