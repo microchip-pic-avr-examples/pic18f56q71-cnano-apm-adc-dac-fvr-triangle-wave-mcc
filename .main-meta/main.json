@@ -37,7 +37,7 @@
             }
         },
         "author": "Mihai Alexandru Ricanu",
-        "peripherals": ["APM","DAC","ADCCC","FVR"],
+        "peripherals": ["APM","DAC","ADCCC"],
         "keywords": ["APM"],
         "additionalData": {
             "longDescription": {
