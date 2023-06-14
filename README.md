@@ -2,7 +2,7 @@
 
 # Analog Peripheral Manager (APM) — Triangle waveform generation with FVR, ADC, DAC and APM using PIC18F56Q71 Microcontroller with MCC Melody
 
-This code example highlights the capabilities of the Analog Peripheral Manager (APM) as well as its configuration in MCC Melody. The Fixed Voltage Reference (FVR) peripheral is used to provide voltage references of 2.048 V and 4.096 V to the Analog-to-Digital (ADC) and Digital-to-Analog Converters (DAC) respectively. The DAC peripheral is used to output a triangle waveform with variable amplitude controlled by the value measured by the ADC from a potentiometer. The APM is set as the auto-conversion trigger source for the ADC, and the Timer1 (TMR1) module’s overflow interrupt is used to alter the output of the DAC peripheral. The ADC peripheral’s conversion-complete interrupt is used to modify the amplitude of the triangle waveform. The APM periodically enables the FVR to set the voltage references, the ADC to perform a single conversion and the DAC to output the triangle waveform.
+This code example highlights the capabilities of the Analog Peripheral Manager (APM) and its configuration in MCC Melody. The Fixed Voltage Reference (FVR) peripheral provides voltage references of 2.048V and 4.096V to the Analog-to-Digital (ADC) and Digital-to-Analog Converters (DAC) respectively. The DAC peripheral is used to output a triangle waveform with variable amplitude controlled by the value measured by the ADC from a potentiometer. The APM is set as the auto-conversion trigger source for the ADC, and the Timer1 (TMR1) module’s overflow interrupt is used to alter the output of the DAC peripheral. The ADC peripheral’s conversion-complete interrupt is used to modify the amplitude of the triangle waveform. The APM periodically enables the FVR to set the voltage references, the ADC to perform a single conversion, and the DAC to output the triangle waveform.
 
 ## Related Documentation
 
@@ -39,7 +39,7 @@ The following configurations must be made for this project:
 
 - Clock Control:
   - Clock Source: HFINTOSC
-  - HF Internal Clock: 64 MHz
+  - HF Internal Clock: 64MHz
   - Clock Divider: 1
 - Configuration bits:
   - WDT operating mode: WDT Disabled
@@ -50,15 +50,15 @@ The following configurations must be made for this project:
   - 16-Bit Read/Write Mode Enabled: Yes
   - Clock Source: HFINTOSC
   - Prescaler: 1:8
-  - Timer Period: 5 ms
+  - Timer Period: 5ms
   - TMR Interrupt Enable: Yes
 - FVR:
   - Enable FVR: No
   - FVR buffer 1 Gain (to ADC): 2x 
   - FVR buffer 2 Gain (to DAC): 4x
 - DAC1:
-  - V<sub>DD</sub>: 5 V
-  - Required ref: 4.096 V
+  - V<sub>DD</sub>: 5V
+  - Required ref: 4.096V
   - DAC Enable: No
   - DAC Positive reference selection: FVR
   - DAC Negative reference selection: V<sub>SS</sub>
@@ -68,7 +68,7 @@ The following configurations must be made for this project:
   - Input Configuration: single-ended mode
   - Auto-conversion Trigger Source: Analog Peripheral Module
   - Result Format: right justified
-  - V<sub>DD</sub>: 5 V
+  - V<sub>DD</sub>: 5V
   - Clock Selection: ADCRC
   - ADI Interrupt: Enabled
   - Context 1 configuration:
@@ -78,16 +78,16 @@ The following configurations must be made for this project:
 - APM:
   - APM Enable: Yes
   - Clock Source: LFINTOSC
-  - Requested Period: 12 s
+  - Requested Period: 12s
   - APM Events: 
     - Start 1: enable FVR Buffer 1 and ADCA
     - Start 2: enable FVR Buffer 2, ADCD and DAC1
     - End 1: disable FVR Buffer 1, ADCA and ADCD
     - End 2: disable FVR Buffer 2 and DAC1 
-  - Requested Start 1: 5 s
-  - Requested Start 2: 1 s
-  - Requested End 1: 2 s
-  - Requested End 2: 5 s
+  - Requested Start 1: 5s
+  - Requested Start 2: 1s
+  - Requested End 1: 2s
+  - Requested End 2: 5s
 
 
 | Pin | Configuration  |        Description        |
@@ -125,23 +125,23 @@ Logic analyzer screen captures:
 
 ## Summary
 
-This code example shows how to configure the APM to toggle the FVR, ADC and DAC peripherals and generate a triangle waveform with variable amplitude.
+This code example shows how to configure the APM to toggle the FVR, ADC, and DAC peripherals and generate a triangle waveform with variable amplitude.
 
 <br><br>
 [Back to Top](#analog-peripheral-manager-apm--triangle-waveform-generation-with-fvr-adc-dac-and-apm-using-pic18f56q71-microcontroller-with-mcc-melody)
 <br>
 
-## How to use the variable voltage supply on a Curiosity Nano Microcontroller board
+## How to use the variable voltage supply on the Curiosity Nano board
 
-The VOFF pin connected to the Curiosity Nano microcontroller board is pulled low on Curiosity Nano Adapter. When VOFF is low, the variable voltage power suppy on the Curiosity Nano microcontroller board is disabled, and 3.3V is supplied from the Curiosity Nano Adapter to the microcontroller.
+The VOFF pin connected to the Curiosity Nano board is pulled low on Curiosity Nano Adapter. When VOFF is low, the variable voltage power suppy on the Curiosity Nano board is disabled, and 3.3V is supplied from the Curiosity Nano Adapter to the microcontroller.
 
 The FVR peripheral's output cannot exceed V<sub>DD</sub>, so to obtain a fixed voltage reference of 4.096V some hardware changes must be made to the Curiosity Nano Adapter board.
 
 <br><img src="images/Curiosity-Nano-Adapter-2.PNG" height="400">
 
-To use the variable voltage power supply on a Curiosity Nano microcontroller board, it is required to remove resistors R11 and R15 from the Curiosity Nano Adapter. For additional information on this subject refer to [Curiosity Nano Base for Click boards™ Hardware User Guide](https://ww1.microchip.com/downloads/en/DeviceDoc/Curiosity-Nano-Base-for-Click-boards-User-Guide-50002839.pdf).
+To use the variable voltage power supply on the Curiosity Nano board, remove resistors R11 and R15 from the Curiosity Nano Adapter. For additional information on this subject refer to [Curiosity Nano Base for Click boards™ Hardware User Guide](https://ww1.microchip.com/downloads/en/DeviceDoc/Curiosity-Nano-Base-for-Click-boards-User-Guide-50002839.pdf).
 
-**Note: The above changes are optional for this code example. If not performed, the FVR peripheral's output will be limited to V<sub>DD</sub> which is 3.3V by default.**
+**Note: The above changes are optional for this code example. If not performed, the FVR peripheral's output will be limited to V<sub>DD</sub>, which is 3.3V by default.**
 
 ## How to Program the Curiosity Nano Board
 
