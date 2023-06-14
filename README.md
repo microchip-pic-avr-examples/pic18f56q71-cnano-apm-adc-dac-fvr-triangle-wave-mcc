@@ -39,7 +39,7 @@ The following configurations must be made for this project:
 
 - Clock Control:
   - Clock Source: HFINTOSC
-  - HF Internal Clock: 64MHz
+  - HF Internal Clock: 64 MHz
   - Clock Divider: 1
 - Configuration bits:
   - WDT operating mode: WDT Disabled
@@ -50,7 +50,7 @@ The following configurations must be made for this project:
   - 16-Bit Read/Write Mode Enabled: Yes
   - Clock Source: HFINTOSC
   - Prescaler: 1:8
-  - Timer Period: 5ms
+  - Timer Period: 5 ms
   - TMR Interrupt Enable: Yes
 - FVR:
   - Enable FVR: No
