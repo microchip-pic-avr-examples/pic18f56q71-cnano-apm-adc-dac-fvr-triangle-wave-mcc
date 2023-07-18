@@ -4,7 +4,7 @@
     "content": {
         "metaDataVersion": "1.3.0",
         "name": "com.microchip.mcu8.mplabx.project.pic18f56q71-cnano-apm-adc-dac-fvr-triangle-wave-mcc",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "displayName": "Analog Peripheral Manager (APM) — Triangle waveform generation with FVR, ADC, DAC and APM using PIC18F56Q71 Microcontroller with MCC Melody",
         "projectName": "pic18f56q71-cnano-apm-adc-dac-fvr-triangle-wave-mcc",
         "shortDescription": "PIC18 Q71 - Basic Configurations of the APM. Using the APM to periodically toggle the FVR, ADC and DAC peripherals to output a triangle waveform with variable amplitude dependent on a value measured from a potentiometer.",
@@ -20,7 +20,7 @@
         ],
         "dfp": {
             "name": "PIC18F-Q_DFP",
-            "semverRange": "^1.18.389"
+            "semverRange": "^1.19.401"
         },
         "configurator": {
             "name": "MCC",

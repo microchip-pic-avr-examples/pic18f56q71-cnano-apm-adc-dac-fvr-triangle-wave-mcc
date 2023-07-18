@@ -100,7 +100,7 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC18F-Q_DFP" vendor="Microchip" version="1.18.389"/>
+        <pack name="PIC18F-Q_DFP" vendor="Microchip" version="1.19.401"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -315,8 +315,6 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-ffff"/>
         <property key="poweroptions.powerenable" value="true"/>
-        <property key="programmerToGoFilePath"
-                  value="C:/Users/M71602/Documents/pic-q71-adc-dac/pic-q71-adc-dac-triangle-amplitude.X/debug/default/pic-q71-adc-dac-triangle-amplitude_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"
@@ -346,7 +344,7 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC18F-Q_DFP" vendor="Microchip" version="1.18.389"/>
+        <pack name="PIC18F-Q_DFP" vendor="Microchip" version="1.19.401"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -561,8 +559,6 @@
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-ffff"/>
         <property key="poweroptions.powerenable" value="true"/>
-        <property key="programmerToGoFilePath"
-                  value="C:/Users/M71602/Documents/pic-q71-adc-dac/pic-q71-adc-dac-triangle-amplitude.X/debug/default/pic-q71-adc-dac-triangle-amplitude_ptg"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.preservedataflash" value="false"/>
         <property key="programoptions.preservedataflash.ranges"

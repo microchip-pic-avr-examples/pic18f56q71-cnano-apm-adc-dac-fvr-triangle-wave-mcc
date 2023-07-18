@@ -33,12 +33,9 @@
 #include "mcc_generated_files/system/system.h"
 #include <math.h>
 
-/* Number of samples for a triangle wave period */
-#define TRIANGLE_PERIOD_STEPS       (100UL)
-/* Triangle wave amplitude */
-#define TRIANGLE_MAX_AMPLITUDE      (511UL)  /* LSB Steps */
-/* Triangle wave DC offset */
-#define DC_OFFSET                   (512UL)  /* LSB Steps */
+#define TRIANGLE_PERIOD_STEPS       (100UL)     /* number of samples for a triangle wave period */
+#define TRIANGLE_MAX_AMPLITUDE      (511UL)     /* LSB steps */
+#define DC_OFFSET                   (512UL)     /* LSB steps */
 
 /* Buffer to store the triangle wave samples */
 uint16_t triangleWave[TRIANGLE_PERIOD_STEPS];
@@ -64,16 +61,16 @@ void TMR1_Handler(void)
     if(!APM_StatusGet())
     {
        DAC1_SetOutput(DC_OFFSET);
-       Timer1_Stop();
+       TMR1_Stop();
     }
 }
 
 void ADC_Handler(void)
 {
     adcResult = ADC_GetConversionResult();
-    triangleWaveInit(adcResult/8);          /* 2.048/2.048*(2^12-1) = 4095 maximum decimal value the ADC can output. (4095 / 8) = 511 = TRIANGLE_MAX_AMPLITUDE */
+    triangleWaveInit(adcResult / 8);              /* 4095 / 8 = 511 = TRIANGLE_MAX_AMPLITUDE */
     triangleIndex = 0;
-    Timer1_Reload(); 
+    TMR1_Reload(); 
 }
 
 /*
@@ -83,6 +80,10 @@ void ADC_Handler(void)
 int main(void)
 {
     SYSTEM_Initialize();
+    
+    ADC_SetADIInterruptHandler(ADC_Handler);
+    TMR1_OverflowCallbackRegister(TMR1_Handler);
+    DAC1_SetOutput(DC_OFFSET);
 
     // If using interrupts in PIC18 High/Low Priority Mode you need to enable the Global High and Low Interrupts 
     // If using interrupts in PIC Mid-Range Compatibility Mode you need to enable the Global Interrupts 
@@ -99,10 +100,6 @@ int main(void)
 
     // Disable the Global Low Interrupts 
     //INTERRUPT_GlobalInterruptLowDisable(); 
-    
-    ADC_SetADIInterruptHandler(ADC_Handler);
-    Timer1_OverflowCallbackRegister(TMR1_Handler);
-    DAC1_SetOutput(DC_OFFSET);
     
     while(1)
     {

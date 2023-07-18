@@ -7,7 +7,7 @@
   *
   * @brief Driver implementation for the TMR1 driver
   *
-  * @version TMR1 Driver Version 3.1.0
+  * @version TMR1 Driver Version 3.1.2
 */
 /*
 © [2023] Microchip Technology Inc. and its subsidiaries.
@@ -42,21 +42,25 @@
  * Section: Global Variables Definitions
 */
 volatile uint16_t timer1ReloadVal;
-void (*Timer1_InterruptHandler)(void);
+void (*TMR1_InterruptHandler)(void);
 
-const struct TMR_INTERFACE Timer1 = {
-    .Initialize = Timer1_Initialize,
-    .Start = Timer1_Start,
-    .Stop = Timer1_Stop,
-    .PeriodCountSet = Timer1_PeriodCountSet,
-    .TimeoutCallbackRegister = Timer1_OverflowCallbackRegister,
+const struct TMR_INTERFACE tmr1 = {
+    .Initialize = TMR1_Initialize,
+    .Start = TMR1_Start,
+    .Stop = TMR1_Stop,
+    .PeriodCountSet = TMR1_PeriodCountSet,
+    .TimeoutCallbackRegister = TMR1_OverflowCallbackRegister,
     .Tasks = NULL
 };
-static void (*Timer1_OverflowCallback)(void);
-static void Timer1_DefaultOverflowCallback(void);
+static void (*TMR1_OverflowCallback)(void);
+static void TMR1_DefaultOverflowCallback(void);
+static void (*TMR1_GateCallback)(void);
+static void TMR1_DefaultGateCallback(void);
 
-void Timer1_Initialize(void)
+void TMR1_Initialize(void)
 {
+    //Disable timer
+    T1CONbits.TMR1ON = 0;
     //TGGO done; TGSPM disabled; TGTM disabled; TGPOL low; TMRGE disabled; 
     T1GCON = 0x0;
     //TGSS T1GPPS; 
@@ -72,7 +76,10 @@ void Timer1_Initialize(void)
     timer1ReloadVal=(uint16_t)((TMR1H << 8) | TMR1L);
 
     //Set default callback for TMR1 overflow interrupt
-    Timer1_OverflowCallbackRegister(Timer1_DefaultOverflowCallback);
+    TMR1_OverflowCallbackRegister(TMR1_DefaultOverflowCallback);
+
+    //Set default callback for TMR1 gate interrupt
+    TMR1_GateCallbackRegister(TMR1_DefaultGateCallback);
 
     // Clearing TMRI IF flag before enabling the interrupt.
      PIR3bits.TMR1IF = 0;
@@ -83,26 +90,24 @@ void Timer1_Initialize(void)
     T1CON = 0x36;
 }
 
-void Timer1_Start(void)
+void TMR1_Start(void)
 {
     // Start the Timer by writing to TMRxON bit
     T1CONbits.TMR1ON = 1;
 }
 
-void Timer1_Stop(void)
+void TMR1_Stop(void)
 {
     // Stop the Timer by writing to TMRxON bit
     T1CONbits.TMR1ON = 0;
 }
 
-uint16_t Timer1_Read(void)
+uint16_t TMR1_Read(void)
 {
     uint16_t readVal;
     uint8_t readValHigh;
     uint8_t readValLow;
-    
-    T1CONbits.T1RD16 = 1;
-	
+    	
     readValLow = TMR1L;
     readValHigh = TMR1H;
     
@@ -111,7 +116,7 @@ uint16_t Timer1_Read(void)
     return readVal;
 }
 
-void Timer1_Write(size_t timerVal)
+void TMR1_Write(size_t timerVal)
 {
     if (T1CONbits.NOT_SYNC == 1)
     {
@@ -133,59 +138,74 @@ void Timer1_Write(size_t timerVal)
     }
 }
 
-void Timer1_Reload(void)
+void TMR1_Reload(void)
 {
-    Timer1_Write(timer1ReloadVal);
+    TMR1_Write(timer1ReloadVal);
 }
 
-void Timer1_PeriodCountSet(size_t periodVal)
+void TMR1_PeriodCountSet(size_t periodVal)
 {
    timer1ReloadVal = (uint16_t) periodVal;
 }
 
-void Timer1_StartSinglePulseAcquisition(void)
+void TMR1_StartSinglePulseAcquisition(void)
 {
     T1GCONbits.T1GGO = 1;
 }
 
-uint8_t Timer1_CheckGateValueStatus(void)
+uint8_t TMR1_CheckGateValueStatus(void)
 {
     return (T1GCONbits.T1GVAL);
 }
 
-void __interrupt(irq(TMR1),base(8)) Timer1_OverflowISR()
+void __interrupt(irq(TMR1),base(8)) TMR1_OverflowISR()
 {
 
     // Clear the TMR1 interrupt flag
     PIR3bits.TMR1IF = 0;
-    Timer1_Write(timer1ReloadVal);
+    TMR1_Write(timer1ReloadVal);
 
-    if(Timer1_OverflowCallback)
+    if(TMR1_OverflowCallback)
     {
-        Timer1_OverflowCallback();
+        TMR1_OverflowCallback();
     }
 }
 
-void Timer1_OverflowCallbackRegister(void (* CallbackHandler)(void))
+void TMR1_OverflowCallbackRegister(void (* CallbackHandler)(void))
 {
-    Timer1_OverflowCallback = CallbackHandler;
+    TMR1_OverflowCallback = CallbackHandler;
 }
 
-static void Timer1_DefaultOverflowCallback(void)
+static void TMR1_DefaultOverflowCallback(void)
 {
     //Add your interrupt code here or
-    //Use Timer1_OverflowCallbackRegister function to use Custom ISR
+    //Use TMR1_OverflowCallbackRegister function to use Custom ISR
 }
 
-bool Timer1_HasOverflowOccured(void)
+bool TMR1_HasOverflowOccured(void)
 {
     return(PIR3bits.TMR1IF);
 }
 
-void __interrupt(irq(TMR1G),base(8)) Timer1_GateISR()
+void __interrupt(irq(TMR1G),base(8)) TMR1_GateISR()
 {
     // clear the TMR1 interrupt flag
     PIR3bits.TMR1GIF = 0;
+    if(TMR1_GateCallback)
+    {
+        TMR1_GateCallback();
+    }
+}
+
+void TMR1_GateCallbackRegister(void (* CallbackHandler)(void))
+{
+    TMR1_GateCallback = CallbackHandler;
+}
+
+static void TMR1_DefaultGateCallback(void)
+{
+    //Add your interrupt code here or
+    //Use TMR1_GateCallbackRegister function to use Custom ISR
 }
 
 

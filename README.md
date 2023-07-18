@@ -15,7 +15,7 @@ More details and code examples on the PIC18F56Q71 can be found at the following 
 
 - [MPLAB® X IDE](http://www.microchip.com/mplab/mplab-x-ide) v6.10 or newer
 - [MPLAB® XC8](http://www.microchip.com/mplab/compilers) v2.41 or newer
-- [PIC18F-Q Series Device Pack](https://packs.download.microchip.com/) v1.18.389 or newer
+- [PIC18F-Q Series Device Pack](https://packs.download.microchip.com/) v1.19.401 or newer
 
 ## Hardware Used
 
@@ -41,10 +41,19 @@ The following configurations must be made for this project:
   - Clock Source: HFINTOSC
   - HF Internal Clock: 64 MHz
   - Clock Divider: 1
+
+  <br><img src="images/case3_clock_control.PNG" width="600">
+
 - Configuration bits:
   - WDT operating mode: WDT Disabled
+
+  <br><img src="images/case3_interrupt_manager.PNG" width="600">
+
 - Interrupt Manager:
   - Enable Vectored Interrupt: Yes
+
+  <br><img src="images/case3_configuration_bits.PNG" width="600">
+
 - TMR1:
   - Enable Timer: No
   - 16-Bit Read/Write Mode Enabled: Yes
@@ -52,10 +61,16 @@ The following configurations must be made for this project:
   - Prescaler: 1:8
   - Timer Period: 5 ms
   - TMR Interrupt Enable: Yes
+
+  <br><img src="images/case3_tmr1.PNG" width="600">
+
 - FVR:
   - Enable FVR: No
   - FVR buffer 1 Gain (to ADC): 2x 
   - FVR buffer 2 Gain (to DAC): 4x
+
+  <br><img src="images/case3_fvr.PNG" width="600">
+
 - DAC1:
   - V<sub>DD</sub>: 5V
   - Required ref: 4.096V
@@ -63,6 +78,9 @@ The following configurations must be made for this project:
   - DAC Positive reference selection: FVR
   - DAC Negative reference selection: V<sub>SS</sub>
   - DAC Output Enable Selection: DACOUT1 Enabled and DACOUT2 Disabled
+
+  <br><img src="images/case3_dac.PNG" width="600">
+
 - ADC:
   - ADC Enable: No
   - Input Configuration: single-ended mode
@@ -75,6 +93,10 @@ The following configurations must be made for this project:
     - Positive Channel Selection: ANA1
     - Positive Voltage Reference: FVR
     - Operating Mode Selection: Basic mode
+  
+  <br><img src="images/case3_adc_1.PNG" width="600">
+  <br><img src="images/case3_adc_2.PNG" width="600">
+
 - APM:
   - APM Enable: Yes
   - Clock Source: LFINTOSC
@@ -89,6 +111,11 @@ The following configurations must be made for this project:
   - Requested End 1: 2s
   - Requested End 2: 5s
 
+  <br><img src="images/case3_apm_1.PNG" width="600">
+  <br><img src="images/case3_apm_2.PNG" width="600">
+
+  The configured APM period is 12s. The Start 1 event, which enables the FVR Buffer 1 and the analog part of the ADC peripheral, occurs 5s after the period counter started. The APM is set as the ADC Auto-conversion Trigger Source, therefore the ADCD Peripheral Start bit needs to be enabled for a conversion to be triggered. The Start 2 event, which enables the FVR Buffer 2, the DAC1 and the ADCD peripherals, occurs 1s after the Start 1 event.
+
 
 | Pin | Configuration  |        Description        |
 | :-: | :------------: | :-----------------------: |
@@ -101,6 +128,8 @@ The following configurations must be made for this project:
 | RB2 | Digital output |         DAC1 status       |
 | RA3 | Digital output |   analog modules status   |
 
+<br><img src="images/case3_pin_grid_view.PNG" width="600">
+
 | Pin |     Label      |
 | :-: | :------------: |
 | RA3 |   FVR1Status   |
@@ -110,7 +139,7 @@ The following configurations must be made for this project:
 | RB2 |   DAC1Status   |
 | RA3 |   APMStatus    |
 
-<br>
+<br><img src="images/case3_pins_configuration.PNG" width="600">
 
 ## Demo
 
@@ -120,12 +149,12 @@ Board setup:
 
 Logic analyzer screen captures:
 
-<br><img src="images/case3_demo_1.png" width="1000">
-<br><img src="images/case3_demo_3_paint_edit.png" width="1000">
+<br><img src="images/case3_demo1.png" width="1000">
+<br><img src="images/case3_demo2.png" width="1000">
 
 ## Summary
 
-This code example shows how to configure the APM to toggle the FVR, ADC, and DAC peripherals and generate a triangle waveform with variable amplitude.
+This code example shows how to configure the APM to enable and disable the FVR, ADC, and DAC peripherals and generate a triangle waveform with variable amplitude.
 
 <br><br>
 [Back to Top](#analog-peripheral-manager-apm--triangle-waveform-generation-with-fvr-adc-dac-and-apm-using-pic18f56q71-microcontroller-with-mcc-melody)

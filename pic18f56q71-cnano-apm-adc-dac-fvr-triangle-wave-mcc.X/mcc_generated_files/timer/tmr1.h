@@ -7,7 +7,7 @@
  *
  * @brief This file contains the API prototypes and other data types for the TMR1 driver.
  *
- * @version TMR1 Driver Version 3.1.0
+ * @version TMR1 Driver Version 3.1.2
 */
 /*
 © [2023] Microchip Technology Inc. and its subsidiaries.
@@ -43,7 +43,7 @@
  * @struct TMR_INTERFACE
  * @brief This is an instance of TMR_INTERFACE for Timer module
  */
-extern const struct TMR_INTERFACE Timer1;
+extern const struct TMR_INTERFACE tmr1;
 
 /**
  * @ingroup tmr1
@@ -52,60 +52,60 @@ extern const struct TMR_INTERFACE Timer1;
  * @param None.
  * @return None.
  */
-void Timer1_Initialize(void);
+void TMR1_Initialize(void);
 
 /**
  * @ingroup tmr1
  * @brief Starts the timer.
- * @pre The timer should be initialized with Timer1_Initialize() before calling this API.
+ * @pre The timer should be initialized with TMR1_Initialize() before calling this API.
  * @param None.
  * @return None.
  */
-void Timer1_Start(void);
+void TMR1_Start(void);
 
 /**
  * @ingroup tmr1
  * @brief Stops the timer.
- * @pre The timer should be initialized with Timer1_Initialize() before calling this API.
+ * @pre The timer should be initialized with TMR1_Initialize() before calling this API.
  * @param None.
  * @return None.
  */
-void Timer1_Stop(void);
+void TMR1_Stop(void);
 
 /**
  * @ingroup tmr1
  * @brief Reads the 16-bit from the TMR1 register.
- *        The Timer should be initialized with Timer1_Initialize() before calling this API.
+ *        The Timer should be initialized with TMR1_Initialize() before calling this API.
  * @param None.
  * @return uint16_t - 16-bit data from the TMR1 register.
  */
-uint16_t Timer1_Read(void);
+uint16_t TMR1_Read(void);
 
 /**
  * @ingroup tmr1
  * @brief Writes the 16-bit value to the TMR1 register.
- * @pre The timer should be initialized with Timer1_Initialize() before calling this API.
+ * @pre The timer should be initialized with TMR1_Initialize() before calling this API.
  * @param size_t timerVal - 16-bit value written to the TMR1 register.
  * @return None.
  */
-void Timer1_Write(size_t timerVal);
+void TMR1_Write(size_t timerVal);
 
 /**
  * @ingroup tmr1
  * @brief Loads the 8-bit value to the TMR1 register.
- * @pre The timer should be initialized with Timer1_Initialize() before calling this API.
+ * @pre The timer should be initialized with TMR1_Initialize() before calling this API.
  * @param None.
  * @return None.
  */
-void Timer1_Reload(void);
+void TMR1_Reload(void);
 
 /**
  * @ingroup tmr1
  * @brief Loads the 16-bit value to the timer1ReloadVal variable.
- * @param 16-bit value. 
+ * @param periodVal - 16-bit value. 
  * @return None.
  */
-void Timer1_PeriodCountSet(size_t periodVal);
+void TMR1_PeriodCountSet(size_t periodVal);
 
 /**
  * @ingroup tmr1
@@ -114,7 +114,7 @@ void Timer1_PeriodCountSet(size_t periodVal);
  * @param None.
  * @return None.
  */
-void Timer1_StartSinglePulseAcquisition(void);
+void TMR1_StartSinglePulseAcquisition(void);
 
 /**
  * @ingroup tmr1
@@ -123,7 +123,7 @@ void Timer1_StartSinglePulseAcquisition(void);
  * @param None.
  * @return uint8_t - Gate value status.
  */
-uint8_t Timer1_CheckGateValueStatus(void);
+uint8_t TMR1_CheckGateValueStatus(void);
 
 
 /**
@@ -132,7 +132,7 @@ uint8_t Timer1_CheckGateValueStatus(void);
  * @param void (* CallbackHandler)(void) - Pointer to the custom callback.
  * @return None.
  */
- void Timer1_OverflowCallbackRegister(void (* CallbackHandler)(void));
+ void TMR1_OverflowCallbackRegister(void (* CallbackHandler)(void));
 
 
 /**
@@ -142,8 +142,7 @@ uint8_t Timer1_CheckGateValueStatus(void);
  * @retval true  - Timer overflow has occured.
  * @retval false - Timer overflow has not occured.
  */
-bool Timer1_HasOverflowOccured(void);
-
+bool TMR1_HasOverflowOccured(void);
 
 /**
  * @ingroup tmr1
@@ -151,6 +150,14 @@ bool Timer1_HasOverflowOccured(void);
  * @param None.
  * @return None.
  */
-void Timer1_GateISR(void);
+void TMR1_GateISR(void);
+
+/**
+ * @ingroup tmr1
+ * @brief Setter function for the Timer gate callback.
+ * @param void (* CallbackHandler)(void) - Pointer to the custom callback.
+ * @return None.
+ */
+ void TMR1_GateCallbackRegister(void (* CallbackHandler)(void));
 
 #endif // TMR1_H
