@@ -206,7 +206,7 @@ This chapter demonstrates how to use the MPLAB X IDE to program a PIC® device w
     <br><img src="images/Program_Power_Supply_Setting-2.PNG" width="600">
 
 7.  Program the project to the board.
-    <br>Right click the project and click **Make and Program Device**.
+    <br>Right click the project and then Make and Program Device.
     <br><img src="images/Program_Make_and_Program_Device.PNG" width="600">
 
 <br>
