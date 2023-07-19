@@ -1,8 +1,8 @@
 <a href="https://www.microchip.com" rel="nofollow"><img src="images/microchip.png" alt="MCHP" width="300"/></a>
 
-# Analog Peripheral Manager (APM) — Triangle waveform generation with FVR, ADC, DAC and APM using PIC18F56Q71 Microcontroller with MCC Melody
+# Analog Peripheral Manager (APM) — Triangle Waveform Generation with FVR, ADC, DAC and APM Using the PIC18F56Q71 Microcontroller with MCC Melody
 
-This code example highlights the capabilities of the Analog Peripheral Manager (APM) and its configuration in MCC Melody. The Fixed Voltage Reference (FVR) peripheral provides voltage references of 2.048V and 4.096V to the Analog-to-Digital (ADC) and Digital-to-Analog Converters (DAC) respectively. The DAC peripheral is used to output a triangle waveform with variable amplitude controlled by the value measured by the ADC from a potentiometer. The APM is set as the auto-conversion trigger source for the ADC, and the Timer1 (TMR1) module’s overflow interrupt is used to alter the output of the DAC peripheral. The ADC peripheral’s conversion-complete interrupt is used to modify the amplitude of the triangle waveform. The APM periodically enables the FVR to set the voltage references, the ADC to perform a single conversion, and the DAC to output the triangle waveform.
+This code example highlights the capabilities of the Analog Peripheral Manager (APM) and its configuration in MPLAB® Code Configurator (MCC) Melody. The Fixed Voltage Reference (FVR) peripheral provides voltage references of 2.048V and 4.096V to the Analog-to-Digital (ADC) and Digital-to-Analog Converters (DAC), respectively. The DAC peripheral is used to output a triangle waveform with variable amplitude controlled by the value measured by the ADC from a potentiometer. The APM is set as the auto-conversion trigger source for the ADC, and the Timer1 (TMR1) module’s overflow interrupt is used to alter the output of the DAC peripheral. The ADC peripheral’s conversion-complete interrupt is used to modify the amplitude of the triangle waveform. The APM periodically enables the FVR to set the voltage references, the ADC to perform a single conversion, and the DAC to output the triangle waveform.
 
 ## Related Documentation
 
@@ -25,13 +25,13 @@ More details and code examples on the PIC18F56Q71 can be found at the following 
 - [Curiosity Nano Adapter](https://www.microchip.com/en-us/development-tool/AC164162):
   <br><img src="images/Curiosity-Nano-Adapter.jpg" height="400">
 
-- [POT 3 CLICK](https://www.mikroe.com/pot-3-click) board (mikroBUS socket 1):
+- [POT 3 CLICK board™](https://www.mikroe.com/pot-3-click) (mikroBUS™ socket 1):
   <br><img src="images/pot-3-click-board.jpg" height="400">
 <br>
 
 ## Operation
 
-To program the Curiosity Nano board with this MPLAB® X project, follow the steps provided in the [How to Program the Curiosity Nano Board](#how-to-program-the-curiosity-nano-board) chapter.<br><br>
+To program the Curiosity Nano board with this MPLAB X project, follow the steps provided in the [How to Program the Curiosity Nano Board](#how-to-program-the-curiosity-nano-board) chapter.<br><br>
 
 ## Setup
 
@@ -45,7 +45,7 @@ The following configurations must be made for this project:
   <br><img src="images/case3_clock_control.PNG" width="600">
 
 - Configuration bits:
-  - WDT operating mode: WDT Disabled
+  - WDT operating mode: WDT disabled
 
   <br><img src="images/case3_interrupt_manager.PNG" width="600">
 
@@ -77,15 +77,15 @@ The following configurations must be made for this project:
   - DAC Enable: No
   - DAC Positive reference selection: FVR
   - DAC Negative reference selection: V<sub>SS</sub>
-  - DAC Output Enable Selection: DACOUT1 Enabled and DACOUT2 Disabled
+  - DAC Output Enable Selection: DACOUT1 enabled and DACOUT2 disabled
 
   <br><img src="images/case3_dac.PNG" width="600">
 
 - ADC:
   - ADC Enable: No
-  - Input Configuration: single-ended mode
+  - Input Configuration: Single-ended mode
   - Auto-conversion Trigger Source: Analog Peripheral Module
-  - Result Format: right justified
+  - Result Format: Right justified
   - V<sub>DD</sub>: 5V
   - Clock Selection: ADCRC
   - ADI Interrupt: Enabled
@@ -102,10 +102,10 @@ The following configurations must be made for this project:
   - Clock Source: LFINTOSC
   - Requested Period: 12s
   - APM Events: 
-    - Start 1: enable FVR Buffer 1 and ADCA
-    - Start 2: enable FVR Buffer 2, ADCD and DAC1
-    - End 1: disable FVR Buffer 1, ADCA and ADCD
-    - End 2: disable FVR Buffer 2 and DAC1 
+    - Start 1: Enable FVR Buffer 1 and ADCA
+    - Start 2: Enable FVR Buffer 2, ADCD and DAC1
+    - End 1: Disable FVR Buffer 1, ADCA and ADCD
+    - End 2: Disable FVR Buffer 2 and DAC1 
   - Requested Start 1: 5s
   - Requested Start 2: 1s
   - Requested End 1: 2s
@@ -119,14 +119,14 @@ The following configurations must be made for this project:
 
 | Pin | Configuration  |        Description        |
 | :-: | :------------: | :-----------------------: |
-| RA1 |  Analog input  |        potentiometer      |
+| RA1 |  Analog input  |        Potentiometer      |
 | RA2 |  Analog output |            DAC1           |
 | RA3 | Digital output |         FVR1 status       |
 | RA4 | Digital output |         FVR2 status       |
 | RB0 | Digital output |         ADCD status       |
 | RB1 | Digital output |         ADCA status       |
 | RB2 | Digital output |         DAC1 status       |
-| RA3 | Digital output |   analog modules status   |
+| RA3 | Digital output |   Analog modules status   |
 
 <br><img src="images/case3_pin_grid_view.PNG" width="600">
 
@@ -157,12 +157,12 @@ Logic analyzer screen captures:
 This code example shows how to configure the APM to enable and disable the FVR, ADC, and DAC peripherals and generate a triangle waveform with variable amplitude.
 
 <br><br>
-[Back to Top](#analog-peripheral-manager-apm--triangle-waveform-generation-with-fvr-adc-dac-and-apm-using-pic18f56q71-microcontroller-with-mcc-melody)
+[Back to Top](#analog-peripheral-manager-apm--triangle-waveform-generation-with-fvr-adc-dac-and-apm-using-the-pic18f56q71-microcontroller-with-mcc-melody)
 <br>
 
-## How to use the variable voltage supply on the Curiosity Nano board
+## How to Use the Variable Voltage Supply on the Curiosity Nano Board
 
-The VOFF pin connected to the Curiosity Nano board is pulled low on Curiosity Nano Adapter. When VOFF is low, the variable voltage power suppy on the Curiosity Nano board is disabled, and 3.3V is supplied from the Curiosity Nano Adapter to the microcontroller.
+The VOFF pin connected to the Curiosity Nano board is pulled low on the Curiosity Nano Adapter. When VOFF is low, the variable voltage power suppy on the Curiosity Nano board is disabled, and 3.3V is supplied from the Curiosity Nano Adapter to the microcontroller.
 
 The FVR peripheral's output cannot exceed V<sub>DD</sub>, so to obtain a fixed voltage reference of 4.096V some hardware changes must be made to the Curiosity Nano Adapter board.
 
@@ -170,39 +170,39 @@ The FVR peripheral's output cannot exceed V<sub>DD</sub>, so to obtain a fixed v
 
 To use the variable voltage power supply on the Curiosity Nano board, remove resistors R11 and R15 from the Curiosity Nano Adapter. For additional information on this subject refer to [Curiosity Nano Base for Click boards™ Hardware User Guide](https://ww1.microchip.com/downloads/en/DeviceDoc/Curiosity-Nano-Base-for-Click-boards-User-Guide-50002839.pdf).
 
-**Note: The above changes are optional for this code example. If not performed, the FVR peripheral's output will be limited to V<sub>DD</sub>, which is 3.3V by default.**
+**Note:** The above changes are optional for this code example. If not performed, the FVR peripheral's output will be limited to V<sub>DD</sub>, which is 3.3V by default.
 
 ## How to Program the Curiosity Nano Board
 
-This chapter demonstrates how to use the MPLAB® X IDE to program a PIC® device with an Example_Project.X. This is applicable to other projects.
+This chapter demonstrates how to use the MPLAB X IDE to program a PIC® device with an `Example_Project.X`. This is applicable to other projects.
 
 1.  Connect the board to the PC.
 
-2.  Open the Example_Project.X project in MPLAB® X IDE.
+2.  Open the `Example_Project.X` project in MPLAB X IDE.
 
-3.  Set the Example_Project.X project as main project.
-    <br>Right click the project in the **Projects** tab and click **Set as Main Project**.
+3.  Set the `Example_Project.X` project as main project.
+    <br>Right click the project in the **Projects** tab and click Set as Main Project.
     <br><img src="images/Program_Set_as_Main_Project.PNG" width="600">
 
-4.  Clean and build the Example_Project.X project.
-    <br>Right click the **Example_Project.X** project and select **Clean and Build**.
+4.  Clean and build the `Example_Project.X` project.
+    <br>Right click the `Example_Project.X` project and select Clean and Build.
     <br><img src="images/Program_Clean_and_Build.PNG" width="600">
 
-5.  Select **PICxxxxx Curiosity Nano** in the Connected Hardware Tool section of the project settings:
-    <br>Right click the project and click **Properties**.
+5.  Select PICxxxxx Curiosity Nano in the Connected Hardware Tool section of the project settings:
+    <br>Right click the project and click Properties.
     <br>Click the arrow under the Connected Hardware Tool.
-    <br>Select **PICxxxxx Curiosity Nano** (click the **SN**), click **Apply** and then click **OK**:
+    <br>Select PICxxxxx Curiosity Nano (click the SN), click **Apply** and then **OK**:
     <br><img src="images/Program_Tool_Selection.jpg" width="600">
 
-6.  **Optional - Only required if the variable voltage power supply on the Curiosity Nano board is used.** 
-    <br>Right click the project and click **Properties**.
+6.  **Optional** - Only required if the variable voltage power supply on the Curiosity Nano board is used.
+    <br>Right click the project and click Properties.
     <br>Click on **PKOB nano** under Categories.
     <br>Click the arrow under Options for PKOB nano.
-    <br>Select **Power**:
+    <br>Select Power:
     <br><img src="images/Program_Power_Supply_Setting-1.PNG" width="600">
     <br>Check the box next to Power target circuit.
     <br>Double click below the check box and set the Voltage Level to 5V.
-    <br>Click **Apply** and then click **OK**:
+    <br>Click **Apply** and then **OK**:
     <br><img src="images/Program_Power_Supply_Setting-2.PNG" width="600">
 
 7.  Program the project to the board.
@@ -211,7 +211,13 @@ This chapter demonstrates how to use the MPLAB® X IDE to program a PIC® device
 
 <br>
 
-- [Back to Setup](#setup)
-- [Back to Demo](#demo)
-- [Back to Summary](#summary)
-- [Back to Top](#analog-peripheral-manager-apm--triangle-waveform-generation-with-fvr-adc-dac-and-apm-using-pic18f56q71-microcontroller-with-mcc-melody)
+- [Analog Peripheral Manager (APM) — Triangle Waveform Generation with FVR, ADC, DAC and APM Using the PIC18F56Q71 Microcontroller with MCC Melody](#analog-peripheral-manager-apm--triangle-waveform-generation-with-fvr-adc-dac-and-apm-using-the-pic18f56q71-microcontroller-with-mcc-melody)
+  - [Related Documentation](#related-documentation)
+  - [Software Used](#software-used)
+  - [Hardware Used](#hardware-used)
+  - [Operation](#operation)
+  - [Setup](#setup)
+  - [Demo](#demo)
+  - [Summary](#summary)
+  - [How to Use the Variable Voltage Supply on the Curiosity Nano Board](#how-to-use-the-variable-voltage-supply-on-the-curiosity-nano-board)
+  - [How to Program the Curiosity Nano Board](#how-to-program-the-curiosity-nano-board)
