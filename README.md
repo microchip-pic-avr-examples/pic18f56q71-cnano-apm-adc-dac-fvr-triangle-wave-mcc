@@ -196,7 +196,7 @@ This chapter demonstrates how to use the MPLAB X IDE to program a PIC® device w
 
 6.  **Optional** - Only required if the variable voltage power supply on the Curiosity Nano board is used.
     <br>Right click the project and click Properties.
-    <br>Click on **PKOB nano** under Categories.
+    <br>Click **PKOB nano** under Categories.
     <br>Click the arrow under Options for PKOB nano.
     <br>Select Power:
     <br><img src="images/Program_Power_Supply_Setting-1.PNG" width="600">
